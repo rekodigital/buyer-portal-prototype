@@ -1,22 +1,10 @@
 // src/app/(main)/layout.tsx
-"use client"; // Diperlukan untuk state dan event handler
+"use client";
 
-import { useState, ReactNode } from "react";
+// ... import lainnya
+import { authOptions } from "@/lib/auth"; // <-- PERBARUI PATH INI
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-
-export default function MainLayout({ children }: { children: ReactNode }) {
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/login");
-    },
-  });
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+// ...
 
   // Tampilkan loading state saat sesi sedang diverifikasi
   if (status === "loading") {

@@ -1,52 +1,10 @@
 // src/app/api/auth/[...nextauth]/route.ts
 
-import NextAuth, { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import NextAuth from "next-auth";
+import { authOptions } from "@/lib/auth"; // Impor konfigurasi dari file baru
 
-export const authOptions: NextAuthOptions = {
-  strategy: "jwt",
-  providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        const users = [
-            { id: "1", name: "Buyer User", email: "buyer@example.com", password: "password123", role: "buyer" },
-            { id: "2", name: "Admin User", email: "admin@example.com", password: "admin123", role: "admin" },
-        ];
-        const user = users.find(u => u.email === credentials?.email);
-        if (user && user.password === credentials?.password) {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { password: _password, ...userWithoutPass } = user;
-            return userWithoutPass;
-        }
-        return null;
-      },
-    }),
-  ],
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.role = user.role;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session?.user) {
-        session.user.role = token.role as string;
-      }
-      return session;
-    },
-  },
-  pages: {
-    signIn: "/login",
-  },
-  secret: process.env.NEXTAUTH_SECRET,
-};
-
+// Buat handler menggunakan konfigurasi yang diimpor
 const handler = NextAuth(authOptions);
 
+// Ekspor handler untuk metode GET dan POST, sesuai aturan Next.js
 export { handler as GET, handler as POST };
