@@ -1,10 +1,8 @@
 // src/app/(main)/documents/certificates/page.tsx
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Download } from "lucide-react";
 
-// Data dummy. Ganti URL dengan link ke file PDF Anda yang sebenarnya.
-// Untuk contoh, kita gunakan link ke PDF dummy.
 const certificates = [
   {
     name: "Sertifikat Halal MUI",
@@ -32,7 +30,7 @@ const certificates = [
 export default function CertificatesPage() {
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Dokumen & Sertifikat</h1>
+      <h2 className="text-2xl font-semibold mb-4">Dokumen & Sertifikat</h2>
       <div className="space-y-4">
         {certificates.map((cert, index) => (
           <Card key={index}>

@@ -24,7 +24,6 @@ export default function UploadPage() {
   });
 
   function onSubmit(values: z.infer<typeof uploadSchema>) {
-    // Di aplikasi nyata, Anda akan mengirim file ini ke backend/penyimpanan cloud.
     console.log("Data Upload:", values);
     alert(`Bukti bayar untuk invoice ${values.invoiceNumber} berhasil diupload!`);
     form.reset({ invoiceNumber: "", notes: "" });
@@ -51,7 +50,7 @@ export default function UploadPage() {
           <FormField
             control={form.control}
             name="paymentProof"
-            render={({ field: { onChange, value, ...rest } }) => (
+            render={({ field: { onChange, ...rest } }) => (
               <FormItem>
                 <FormLabel>File Bukti Bayar (TT Copy)</FormLabel>
                 <FormControl>

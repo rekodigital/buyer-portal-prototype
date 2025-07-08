@@ -17,7 +17,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
@@ -123,7 +122,6 @@ export default function ManageProductsPage() {
                 <TableCell>${product.price.toLocaleString()}</TableCell>
                 <TableCell>
                   <div className="flex gap-2">
-                    {/* --- PERUBAHAN DI SINI --- */}
                     <Button variant="secondary" size="sm" onClick={() => handleEdit(product)}>Edit</Button>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
@@ -159,7 +157,7 @@ export default function ManageProductsPage() {
             <DialogHeader>
               <DialogTitle>{editingProduct ? "Edit Product" : "Add New Product"}</DialogTitle>
               <DialogDescription>
-                Make changes to your product here. Click save when you're done.
+                Make changes to your product here. Click save when you&apos;re done.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">

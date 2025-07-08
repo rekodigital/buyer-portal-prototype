@@ -7,7 +7,6 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Select,
@@ -16,9 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"; // Kita akan butuh ini untuk integrasi yang lebih baik
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
-// Data produk dummy
 const products = [
   { id: "p1", name: "Chicken Feet Grade A" },
   { id: "p2", name: "Chicken Paws Grade B" },
@@ -28,8 +26,8 @@ const products = [
 
 const newOrderSchema = z.object({
   productId: z.string({ required_error: "Produk harus dipilih." }),
-  quantity: z.coerce.number().min(1, "Kuantitas minimal 1 MT."), // coerce mengubah string dari input menjadi number
-  poFile: z.instanceof(File).optional(), // PO file tidak wajib
+  quantity: z.coerce.number().min(1, "Kuantitas minimal 1 MT."),
+  poFile: z.instanceof(File).optional(),
 });
 
 export default function NewOrderPage() {
@@ -38,11 +36,9 @@ export default function NewOrderPage() {
   });
 
   function onSubmit(values: z.infer<typeof newOrderSchema>) {
-    // Di sini Anda akan mengirim data ke backend.
-    // Untuk sekarang, kita hanya akan menampilkannya di console.
     console.log("Data Order Baru:", values);
     alert(`Order untuk produk ID ${values.productId} sejumlah ${values.quantity} MT berhasil dibuat!`);
-    form.reset({ quantity: 0 }); // Reset form
+    form.reset({ quantity: 0 });
   }
 
   return (

@@ -18,7 +18,9 @@ const invoices = [
     { invoiceNumber: "INV-004", orderId: "PO126", issueDate: "2025-07-30", dueDate: "2025-08-15", amount: 25000, status: "Outstanding", url: "#" },
 ];
 
-const getStatusVariant = (status: string) => {
+type BadgeVariant = React.ComponentProps<typeof Badge>["variant"];
+
+const getStatusVariant = (status: string): BadgeVariant => {
     return status === "Paid" ? "default" : "destructive";
 }
 
@@ -46,7 +48,7 @@ export default function InvoicesPage() {
                             <TableCell>{invoice.dueDate}</TableCell>
                             <TableCell>${invoice.amount.toLocaleString()}</TableCell>
                             <TableCell>
-                                <Badge variant={getStatusVariant(invoice.status) as any}>{invoice.status}</Badge>
+                                <Badge variant={getStatusVariant(invoice.status)}>{invoice.status}</Badge>
                             </TableCell>
                             <TableCell>
                                 <a href={invoice.url} download>

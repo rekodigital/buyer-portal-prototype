@@ -1,7 +1,7 @@
 // src/app/(admin)/admin/users/page.tsx
 "use client";
 
-import Link from "next/link"; // Import Link
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -20,9 +20,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { userProfiles } from "@/lib/data"; // Import data terpusat
+import { userProfiles } from "@/lib/data";
 
-const getRoleVariant = (role: string) => {
+type BadgeVariant = React.ComponentProps<typeof Badge>["variant"];
+
+const getRoleVariant = (role: string): BadgeVariant => {
   return role === "admin" ? "destructive" : "secondary";
 };
 
@@ -50,7 +52,6 @@ export default function ManageUsersPage() {
             {userProfiles.map((user) => (
               <TableRow key={user.id} className="border-gray-700">
                 <TableCell className="font-medium">
-                  {/* Nama sekarang menjadi Link */}
                   <Link href={`/admin/users/${user.id}`} className="hover:underline text-yellow-400">
                     {user.contactPerson}
                   </Link>
@@ -58,7 +59,7 @@ export default function ManageUsersPage() {
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.companyName}</TableCell>
                 <TableCell>
-                  <Badge variant={getRoleVariant(user.role) as any}>
+                  <Badge variant={getRoleVariant(user.role)}>
                     {user.role}
                   </Badge>
                 </TableCell>

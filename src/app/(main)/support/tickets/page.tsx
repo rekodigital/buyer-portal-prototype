@@ -14,7 +14,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 
-// Data dummy untuk tiket bantuan
 const tickets = [
     { id: "TICKET-001", subject: "Pertanyaan tentang pengiriman PO123", status: "Resolved", lastUpdate: "2025-07-05" },
     { id: "TICKET-002", subject: "Dokumen Health Certificate tidak lengkap", status: "In Progress", lastUpdate: "2025-07-08" },
@@ -22,8 +21,9 @@ const tickets = [
     { id: "TICKET-004", subject: "Jadwal loading untuk order baru", status: "Resolved", lastUpdate: "2025-06-28" },
 ];
 
-// Fungsi untuk menentukan warna Badge berdasarkan status
-const getStatusVariant = (status: string) => {
+type BadgeVariant = React.ComponentProps<typeof Badge>["variant"];
+
+const getStatusVariant = (status: string): BadgeVariant => {
   switch (status) {
     case "Resolved":
       return "default";
@@ -64,7 +64,7 @@ export default function TicketsPage() {
                                 <TableCell className="font-medium">{ticket.id}</TableCell>
                                 <TableCell>{ticket.subject}</TableCell>
                                 <TableCell>
-                                    <Badge variant={getStatusVariant(ticket.status) as any}>{ticket.status}</Badge>
+                                    <Badge variant={getStatusVariant(ticket.status)}>{ticket.status}</Badge>
                                 </TableCell>
                                 <TableCell>{ticket.lastUpdate}</TableCell>
                             </TableRow>

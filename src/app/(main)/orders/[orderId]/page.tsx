@@ -2,10 +2,9 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-// Kita gunakan data dummy yang sama untuk simulasi
 const orders = [
   { id: "PO123", product: "Chicken Feet Grade A", qty: 27, port: "Singapore", status: "In Production", container: "CMAU1234567", blNumber: "BL-XYZ-987", loadingSchedule: "2025-08-15" },
   { id: "PO124", product: "Chicken Paws Grade B", qty: 26, port: "Klang, Malaysia", status: "Ready to Ship", container: "MSCU7654321", blNumber: "BL-ABC-123", loadingSchedule: "2025-08-10" },
@@ -18,7 +17,6 @@ export default function OrderDetailPage() {
   const params = useParams();
   const orderId = params.orderId;
 
-  // Cari order berdasarkan ID dari URL. Di aplikasi nyata, ini adalah API call.
   const order = orders.find((o) => o.id === orderId);
 
   if (!order) {

@@ -28,6 +28,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+// Data dummy yang lebih detail, termasuk nama pembeli.
 const allOrders = [
   { id: "PO123", buyer: "PT Maju Jaya", product: "Chicken Feet Grade A", qty: 27, port: "Singapore", status: "In Production" },
   { id: "PO124", buyer: "Global Exports Ltd.", product: "Chicken Paws Grade B", qty: 26, port: "Klang, Malaysia", status: "Ready to Ship" },
@@ -37,14 +38,15 @@ const allOrders = [
   { id: "PO128", buyer: "Big Traders Inc.", product: "Chicken Paws Grade A", qty: 27, port: "Laem Chabang", status: "Open" },
 ];
 
-// --- FUNGSI INI DIPERBARUI ---
-const getStatusVariant = (status: string) => {
+type BadgeVariant = React.ComponentProps<typeof Badge>["variant"];
+
+const getStatusVariant = (status: string): BadgeVariant => {
   switch (status) {
-    case "Completed": return "default"; // Hitam
-    case "Ready to Ship": return "secondary"; // Abu-abu
-    case "In Production": return "secondary"; // Diubah dari 'outline' ke 'secondary'
-    case "On Board Vessel": return "destructive"; // Merah
-    case "Open": return "secondary"; // Diubah dari 'outline' ke 'secondary'
+    case "Completed": return "default";
+    case "Ready to Ship": return "secondary";
+    case "In Production": return "secondary";
+    case "On Board Vessel": return "destructive";
+    case "Open": return "secondary";
     default: return "default";
   }
 };
@@ -57,6 +59,7 @@ export default function ManageOrdersPage() {
         <p className="text-gray-400">View, filter, and update all customer orders.</p>
       </div>
 
+      {/* Area Filter */}
       <div className="flex items-center gap-4">
         <Input placeholder="Filter by Order ID or Buyer..." className="max-w-xs bg-gray-800 border-gray-700" />
         <Select>
@@ -74,6 +77,7 @@ export default function ManageOrdersPage() {
         <Button className="bg-yellow-400 hover:bg-yellow-500 text-black">Apply Filters</Button>
       </div>
 
+      {/* Tabel Order */}
       <div className="border rounded-md border-gray-700">
         <Table>
           <TableHeader>
@@ -94,7 +98,7 @@ export default function ManageOrdersPage() {
                 <TableCell>{order.product}</TableCell>
                 <TableCell>{order.qty}</TableCell>
                 <TableCell>
-                  <Badge variant={getStatusVariant(order.status) as any}>
+                  <Badge variant={getStatusVariant(order.status)}>
                     {order.status}
                   </Badge>
                 </TableCell>

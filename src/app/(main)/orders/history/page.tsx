@@ -1,4 +1,5 @@
 // src/app/(main)/orders/history/page.tsx
+"use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,6 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 
-// Data dummy. Nantinya ini akan diambil dari database.
 const orders = [
   { id: "PO123", product: "Chicken Feet Grade A", qty: 27, port: "Singapore", status: "In Production" },
   { id: "PO124", product: "Chicken Paws Grade B", qty: 26, port: "Klang, Malaysia", status: "Ready to Ship" },
@@ -22,8 +22,9 @@ const orders = [
   { id: "PO127", product: "Chicken MDM", qty: 28, port: "Bangkok, Thailand", status: "Completed" },
 ];
 
-// Fungsi untuk menentukan warna Badge berdasarkan status
-const getStatusVariant = (status: string) => {
+type BadgeVariant = React.ComponentProps<typeof Badge>["variant"];
+
+const getStatusVariant = (status: string): BadgeVariant => {
   switch (status) {
     case "Completed":
       return "default";
@@ -38,7 +39,6 @@ const getStatusVariant = (status: string) => {
   }
 };
 
-
 export default function OrderHistoryPage() {
   return (
     <div>
@@ -51,7 +51,6 @@ export default function OrderHistoryPage() {
         </Link>
       </div>
       
-      {/* --- Perubahan Dimulai Di Sini --- */}
       <div className="border rounded-md">
         <Table>
           <TableHeader>
@@ -67,7 +66,6 @@ export default function OrderHistoryPage() {
             {orders.map((order) => (
               <TableRow key={order.id}>
                 <TableCell className="font-medium">
-                  {/* Order ID sekarang menjadi Link */}
                   <Link href={`/orders/${order.id}`} className="text-blue-600 hover:underline">
                     {order.id}
                   </Link>
@@ -76,7 +74,7 @@ export default function OrderHistoryPage() {
                 <TableCell>{order.qty}</TableCell>
                 <TableCell>{order.port}</TableCell>
                 <TableCell>
-                  <Badge variant={getStatusVariant(order.status) as any}>{order.status}</Badge>
+                  <Badge variant={getStatusVariant(order.status)}>{order.status}</Badge>
                 </TableCell>
               </TableRow>
             ))}

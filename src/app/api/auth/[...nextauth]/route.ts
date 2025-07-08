@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
         ];
         const user = users.find(u => u.email === credentials?.email);
         if (user && user.password === credentials?.password) {
-            const { password, ...userWithoutPass } = user;
+            const { password: _password, ...userWithoutPass } = user;
             return userWithoutPass;
         }
         return null;
@@ -39,29 +39,6 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    // --- FUNGSI REDIRECT YANG DIPERBARUI ---
-    async redirect({ url, baseUrl, token }) {
-      // Saat LOGIN, token akan ada.
-      if (token) {
-        // Arahkan ke dasbor yang benar berdasarkan peran.
-        const targetUrl = token.role === 'admin' 
-            ? `${baseUrl}/admin/dashboard` 
-            : `${baseUrl}/dashboard`;
-        return targetUrl;
-      } 
-      // Saat LOGOUT, token akan null.
-      // `url` akan berisi `callbackUrl` yang kita berikan dari klien.
-      else if (url.startsWith(baseUrl)) {
-        // Jika URL absolut sudah benar, gunakan itu.
-        return url;
-      } else if (url.startsWith("/")) {
-        // Jika URL relatif (seperti '/login'), gabungkan dengan baseUrl.
-        return `${baseUrl}${url}`;
-      }
-      
-      // Sebagai fallback, kembali ke halaman utama.
-      return baseUrl;
-    }
   },
   pages: {
     signIn: "/login",
