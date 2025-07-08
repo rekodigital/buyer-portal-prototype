@@ -1,7 +1,7 @@
 // src/app/api/auth/role/route.ts
 
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../[...nextauth]/route";
+import { authOptions } from "@/lib/auth"; // <-- PATH IMPOR DIPERBAIKI DI SINI
 import { NextResponse } from "next/server";
 
 export async function GET() {
