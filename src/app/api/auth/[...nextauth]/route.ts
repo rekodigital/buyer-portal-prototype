@@ -19,7 +19,6 @@ export const authOptions: NextAuthOptions = {
         ];
         const user = users.find(u => u.email === credentials?.email);
         if (user && user.password === credentials?.password) {
-            // --- PERUBAHAN DI SINI ---
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { password: _password, ...userWithoutPass } = user;
             return userWithoutPass;
@@ -51,5 +50,3 @@ export const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-
-// Perubahan kecil untuk memicu git
