@@ -101,5 +101,4 @@ export default function MainLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
-
 // Perubahan kecil untuk memicu git
