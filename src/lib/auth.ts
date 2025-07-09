@@ -1,9 +1,14 @@
+// src/lib/auth.ts
+
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 // Seluruh konfigurasi NextAuth sekarang berada di sini.
 export const authOptions: NextAuthOptions = {
-  strategy: "jwt",
+  // Properti 'strategy' dipindahkan ke dalam objek 'session'
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",
