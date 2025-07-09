@@ -47,24 +47,30 @@ export default function UploadPage() {
               </FormItem>
             )}
           />
+
+          {/* --- PERUBAHAN UTAMA DI SINI --- */}
           <FormField
             control={form.control}
             name="paymentProof"
-            render={({ field: { onChange, ...rest } }) => (
-              <FormItem>
-                <FormLabel>File Bukti Bayar (TT Copy)</FormLabel>
-                <FormControl>
-                  <Input
-                    type="file"
-                    accept="image/*,.pdf"
-                    onChange={(e) => onChange(e.target.files?.[0])}
-                    {...rest}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            render={({ field }) => {
+              // Kita sengaja tidak menggunakan 'value' dari field untuk input file
+              return (
+                <FormItem>
+                  <FormLabel>File Bukti Bayar (TT Copy)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="file"
+                      accept="image/*,.pdf"
+                      // Kita hanya perlu event onChange untuk mengambil file
+                      onChange={(e) => field.onChange(e.target.files ? e.target.files[0] : null)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
           />
+          
           <FormField
             control={form.control}
             name="notes"
